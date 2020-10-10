@@ -51,33 +51,30 @@ export default {
     percentBtn() {
       this.display /= 100;
     },
+    enableOperatorClick() {
+      this.preNum = this.display;
+      this.display = "";
+      this.operatorClicked = true;
+    },
     plus() {
       this.operator = (a, b) => a + b;
-      this.preNum = this.display;
-      this.operatorClicked = true;
       this.displayOperator = "+";
-      this.display = "";
+      this.enableOperatorClick();
     },
     minus() {
       this.operator = (a, b) => a - b;
-      this.preNum = this.display;
-      this.operatorClicked = true;
       this.displayOperator = "-";
-      this.display = "";
+      this.enableOperatorClick();
     },
     multiply() {
       this.operator = (a, b) => a * b;
-      this.preNum = this.display;
-      this.operatorClicked = true;
       this.displayOperator = "x";
-      this.display = "";
+      this.enableOperatorClick();
     },
     divide() {
       this.operator = (a, b) => a / b;
-      this.preNum = this.display;
-      this.operatorClicked = true;
       this.displayOperator = "/";
-      this.display = "";
+      this.enableOperatorClick();
     },
     decimal() {
       if (this.display.indexOf(".") === -1) {
@@ -85,6 +82,7 @@ export default {
       }
     },
     equalNum() {
+      console.log(this.operator);
       this.display = this.operator(Number(this.preNum), Number(this.display));
       this.preNum = null;
       this.operatorClicked = true;
@@ -120,7 +118,7 @@ export default {
 
 .display {
   grid-column: 1 / 5;
-  background:rgb(194, 250, 203);
+  background: rgb(194, 250, 203);
   border-top: 0;
   font-size: 2.5rem;
   cursor: default;
@@ -135,12 +133,10 @@ export default {
 
 .button {
   background: rgb(255, 255, 255);
-  
+
   border: black solid 1px;
-  cursor:pointer;
+  cursor: pointer;
 }
-
-
 
 .button-bottom {
   border-bottom: 0;
